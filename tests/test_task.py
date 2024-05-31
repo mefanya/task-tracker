@@ -25,3 +25,7 @@ def test_task_update(capsys, task):
 
     task.created_at = datetime.datetime.now().date().strftime('%d.%m.%Y')
     assert task.created_at == datetime.datetime.now().date().strftime('%d.%m.%Y')
+
+
+def test_user_str(first_user):
+    assert str(first_user) == "Soldatov Mikhail, Email: Mefanya@gmail.com, Всего задач в списке: 2"
