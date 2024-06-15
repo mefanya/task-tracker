@@ -15,8 +15,8 @@ def first_user():
         first_name="Mikhail",
         last_name="Soldatov",
         task_list=[
-            Task("Прыгнуть с паращютом", "Для крутых эмоций", created_at="31.05.2024"),
-            Task("Прыгнуть с тарзанки", "Для крутых эмоций, но только один раз", created_at="31.05.2024")
+            Task("Прыгнуть с паращютом", "Для крутых эмоций", created_at="31.05.2024", run_time=600),
+            Task("Прыгнуть с тарзанки", "Для крутых эмоций, но только один раз", created_at="31.05.2024", run_time=300)
         ]
     )
 
@@ -38,7 +38,7 @@ def second_user():
 
 @pytest.fixture
 def task():
-    return Task("Прыгнуть с паращютом", "Для крутых эмоций", created_at="1.08.2024")
+    return Task("Прыгнуть с паращютом", "Для крутых эмоций", created_at="1.08.2024", run_time=60)
 
 
 @pytest.fixture
@@ -74,3 +74,12 @@ def task_deadline1():
 @pytest.fixture
 def task_deadline2():
     return DeadlineTask("Прыгнуть с тарзанки", "Для крутых эмоций, но только один раз", "30.12.2025",  created_at="25.11.2025", run_time=3600)
+
+
+@pytest.fixture
+def user_without_tests():
+    return User(
+        username="Misha",
+        email="Misha@gmail.com",
+        first_name="Misha",
+        last_name="Pupkin")

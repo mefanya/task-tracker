@@ -1,6 +1,7 @@
 from src.task import Task
 from src.user import User
 
+
 class TaskIterator:
     def __init__(self, user_obj):
         self.user = user_obj

@@ -1,4 +1,5 @@
 from src.task import Task
+from src.exceptions import ZeroRunTimeTask
 
 
 class User:
@@ -33,14 +34,29 @@ class User:
     @task_list.setter
     def task_list(self, task: Task):
         if isinstance(task, Task):
-            self.__task_list.append(task)
-            User.all_tasks_count += 1
+            try:
+                if task.run_time == 0:
+                    raise ZeroRunTimeTask("Нельзя создать задачу с нулевым временем выполнения")
+            except ZeroRunTimeTask as exception:
+                print(str(exception))
+            else:
+                self.__task_list.append(task)
+                User.all_tasks_count += 1
+                print("Задача добавлена успешно")
+            finally:
+                print("Обработка входных данных завершена")
         else:
             raise TypeError
 
     @property
     def task_in_list(self):
         return self.__task_list
+
+    def average_task_completion_time(self):
+        try:
+            return sum([task.run_time for task in self.__task_list])/len(self.__task_list)
+        except ZeroDivisionError:
+            return 0
 
 
 if __name__ == "__main__":
