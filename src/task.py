@@ -7,7 +7,7 @@ class Task:
     status: str
     created_at: str
 
-    def __init__(self, name, description, status="Ожидает старта", created_at=None, run_time=60):
+    def __init__(self, name, description, status="Ожидает старта", created_at=None, run_time=0):
         self.name = name
         self.description = description
         self.status = status
@@ -18,7 +18,9 @@ class Task:
         return f"{self.name}, Статус выполнения: {self.status}, Дата создания: {self.created_at}"
 
     def __add__(self, other):
-        return self.run_time + other.run_time
+        if type(other) is Task:
+            return self.run_time + other.run_time
+        raise TypeError
 
     @classmethod
     def new_task(cls, name, description, status="Ожидает ответа", created_at=None):
