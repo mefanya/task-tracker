@@ -50,3 +50,8 @@ def test_task_iterator(task_iterator):
 
     with pytest.raises(StopIteration):
         next(task_iterator)
+
+
+def test_user_task_list_user_error(first_user, task):
+    with pytest.raises(TypeError):
+        first_user.task_list = 1
