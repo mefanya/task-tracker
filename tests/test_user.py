@@ -1,4 +1,5 @@
 import pytest
+from src.task import Task
 
 
 def test_user_init(first_user, second_user):
@@ -55,3 +56,24 @@ def test_task_iterator(task_iterator):
 def test_user_task_list_user_error(first_user, task):
     with pytest.raises(TypeError):
         first_user.task_list = 1
+
+
+def test_middle_runtime(first_user, user_without_tests):
+    assert first_user.average_task_completion_time() == 450
+    assert user_without_tests.average_task_completion_time() == 0
+
+
+def test_custom_exceptions(capsys, first_user):
+    assert len(first_user.task_in_list) == 2
+
+    add_task = Task("Прыгнуть с паращютом", "Для крутых эмоций", created_at="31.05.2024")
+    first_user.task_list = add_task
+    massage = capsys.readouterr()
+    assert massage.out.strip().split("\n")[-2] == "Нельзя создать задачу с нулевым временем выполнения"
+    assert massage.out.strip().split("\n")[-1] == "Обработка входных данных завершена"
+
+    add_task = Task("Прыгнуть с паращютом", "Для крутых эмоций", created_at="31.05.2024", run_time=600)
+    first_user.task_list = add_task
+    massage = capsys.readouterr()
+    assert massage.out.strip().split("\n")[-2] == "Задача добавлена успешно"
+    assert massage.out.strip().split("\n")[-1] == "Обработка входных данных завершена"
