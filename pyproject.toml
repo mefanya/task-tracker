@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "task-tracker"
+version = "1.0.1"
+description = "test project in which a simple task tracker is implemented"
+authors = ["mefanya"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pytest = "^8.2.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
